@@ -1,7 +1,10 @@
 import "./home.scss"
+import HeroBanner from "./heroBanner/HeroBanner"
 const Home = () => {
     return (
-        <div>Home</div>
+        <div>
+            <HeroBanner />
+        </div>
     )
 }
 
