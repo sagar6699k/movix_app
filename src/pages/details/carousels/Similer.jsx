@@ -5,7 +5,6 @@ import useFetch from "../../../hooks/useFetch";
 
 const Similar = ({ mediaType, id }) => {
     const { data, loading, error } = useFetch(`/${mediaType}/${id}/similar`);
-    // console.log("Similar-data---------->", data);
     const title = mediaType === "tv" ? "Similar TV Shows" : "Similar Movies";
 
     return (
@@ -13,8 +12,7 @@ const Similar = ({ mediaType, id }) => {
             title={title}
             data={data?.results}
             loading={loading}
-            // endpoint={mediaType}
-            endpoint={mediaType === "tv" ? "tv" : "movie"}
+            endpoint={mediaType}
         />
     );
 };

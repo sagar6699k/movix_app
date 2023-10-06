@@ -3,7 +3,7 @@ import {
     BsFillArrowLeftCircleFill,
     BsFillArrowRightCircleFill,
 } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 
@@ -16,7 +16,8 @@ import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
 const Carousel = ({ data, loading, endPoint, title }) => {
-
+    const { mediaType } = useParams()
+    let mediaType1 = mediaType && mediaType
     const { url } = useSelector((state) => state.home)
     const navigate = useNavigate()
     const carouselContainer = useRef()
@@ -75,7 +76,7 @@ const Carousel = ({ data, loading, endPoint, title }) => {
                                     <div
                                         key={item.id}
                                         className="carouselItem"
-                                        onClick={() => navigate(`/${item.media_type || endPoint}/${item.id}`)}
+                                        onClick={() => navigate(`/${item.media_type || endPoint || mediaType1}/${item.id}`)}
                                     >
                                         <div className="posterBlock">
                                             <Img src={posterUrl} />
