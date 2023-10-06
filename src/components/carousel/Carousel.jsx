@@ -15,11 +15,11 @@ import "./carousel.scss";
 import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading, endPoint, title }) => {
 
-    const carouselContainer = useRef()
     const { url } = useSelector((state) => state.home)
     const navigate = useNavigate()
+    const carouselContainer = useRef()
 
     const navigation = (dir) => {
         const container = carouselContainer.current;
@@ -50,6 +50,7 @@ const Carousel = ({ data, loading }) => {
     return (
         <div className="carousel">
             <ContentWrapper>
+                {title && <div className="carouselTitle">{title}</div>}
                 <BsFillArrowLeftCircleFill
                     className="carouselLeftNav arrow"
                     onClick={() => navigation('left')}
@@ -74,11 +75,11 @@ const Carousel = ({ data, loading }) => {
                                     <div
                                         key={item.id}
                                         className="carouselItem"
-                                        onClick={()=> navigate(`/${item.media_type}/${item.id}`)}
+                                        onClick={() => navigate(`/${item.media_type || endPoint}/${item.id}`)}
                                     >
                                         <div className="posterBlock">
                                             <Img src={posterUrl} />
-                                            <CircleRating rating={item.vote_average.toFixed(1)} />
+                                            <CircleRating rating={item.vote_average?.toFixed(1)} />
                                             <Genres data={item.genre_ids.slice(0, 2)} />
                                         </div>
                                         <div className="textBlock">
